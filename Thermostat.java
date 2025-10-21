@@ -1,23 +1,32 @@
 // Thermostat class
 public class Thermostat implements Device {
+    private boolean isOn = false;
     private int temperature = 22;
-    private String mode = "normal";
     
+    @Override
     public void operate() {
-        System.out.println("Thermostat operating at " + temperature + "°C");
+        isOn = !isOn;
+        System.out.println("Thermostat is now " + (isOn ? "ON at " + temperature + "°C" : "OFF"));
     }
     
+    @Override
     public String getStatus() {
-        return "Thermostat: " + temperature + "°C (" + mode + " mode)";
+        return "Thermostat: " + (isOn ? "ON at " + temperature + "°C" : "OFF");
     }
     
     public void setEcoMode() {
-        mode = "eco";
+        isOn = true;
         temperature = 18;
-        System.out.println("Thermostat set to ECO mode at " + temperature + "°C");
+        System.out.println("Thermostat set to ECO MODE (18°C)");
     }
     
     public void turnOff() {
+        isOn = false;
         System.out.println("Thermostat turned OFF");
+    }
+    
+    public void setTemperature(int temp) {
+        temperature = temp;
+        System.out.println("Thermostat temperature set to " + temp + "°C");
     }
 }
